@@ -25,6 +25,10 @@ class PriorityQueue {
         void processStatistics(Customer*);
         float getNextRandomfloaterval(float);
         void Add();
+        int incrementSize();
+        int decrementSize();
+        void setIdleTime(float);
+        float getIdleTime();
         int getSize();
         void Print(int);
 };

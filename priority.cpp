@@ -15,14 +15,14 @@ void PriorityQueue::Push(Customer* toPush, Customer* currentNode) {
     if(toPush == nullptr)
         return;
 
-    if(size > 200) {
+    if(getSize() > 200) {
         fifo.Push(toPush);
     }
 
     if(head == nullptr) {
         head = toPush;
         head->setNext(nullptr);
-        size++;
+        incrementSize();
         return;
     }
 
@@ -30,7 +30,7 @@ void PriorityQueue::Push(Customer* toPush, Customer* currentNode) {
         if(toPush->getPriority() <= head->getPriority()) {
             toPush->setNext(head);
             head = toPush;
-            size++;
+            incrementSize();
             return;
         }
         else
@@ -40,14 +40,14 @@ void PriorityQueue::Push(Customer* toPush, Customer* currentNode) {
     if(currentNode->getNext() == nullptr) {
         toPush->setNext(nullptr);
         currentNode->setNext(toPush);
-        size++;
+        incrementSize();
         return;
     }
 
     if(toPush->getPriority() <= currentNode->getNext()->getPriority()) {
         toPush->setNext(currentNode->getNext());
         currentNode->setNext(toPush);
-        size++;
+        incrementSize();
         return;
     }
 
@@ -61,7 +61,7 @@ Customer* PriorityQueue::Pop() {
 
     Customer* toPop = head;
     head = head->getNext();
-    size--;
+    decrementSize();
 
     return toPop;
 }
@@ -114,7 +114,9 @@ void PriorityQueue::processStatistics(Customer* cust) {
 
     //Po
     if(serverAvailableCnt == M) {
-        idleTime += cust->getDepartureTime() - lastWait;
+    float time = 0;
+    time += (cust->getDepartureTime() - lastWait);
+    setIdleTime(time);
     std::cout << lastWait << std::endl;
     }
     lastWait = cust->getDepartureTime();
@@ -136,6 +138,21 @@ float PriorityQueue::getNextRandomfloaterval(float mu) {
 
 int PriorityQueue::getSize() {
     return size;
+}
+
+int PriorityQueue::incrementSize(){
+    return size++;
+}
+
+int PriorityQueue::decrementSize(){
+    return size--;
+}
+
+void PriorityQueue::setIdleTime(float time){
+    idleTime = time;
+}
+float PriorityQueue::getIdleTime(){
+    return idleTime;
 }
 
 void PriorityQueue::Print(int n) {

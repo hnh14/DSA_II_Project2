@@ -1,11 +1,12 @@
 #include <iostream>
+#include <windows.h>
 #include "priority.hpp"
 #include "stats.hpp"
 
 
 int main() {
-    int n, lambda, mu, M, nCount;
-
+    float n, lambda, mu, M, nCount;
+//you should check to make sure it's between 1000 and 5000
     std::cout << "Please enter the number of arrivals to simulate (n): ";
     std::cin >> n;
     nCount = n;
@@ -25,7 +26,6 @@ int main() {
     model.Print();
 
     PriorityQueue priority(mu, M);
-
     for(int i = 0; i < M; i++) {
         priority.Add();
         nCount--;
@@ -41,6 +41,11 @@ int main() {
             break;
     }
 
-    priority.Print(n);      
+    priority.Print(n);   
+
+    //for some reason the output to console goes away
+    //for me after the program terminates so I have this sleep function
+    //so i can keep looking at the output
+    Sleep(100000);   
     
 }

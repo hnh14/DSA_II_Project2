@@ -42,7 +42,7 @@ float Stats::Summation() {
 }
 
 void Stats::Print() {
-    std::cout << "\nEntered values:\n"
+    std::cout << "\nEntered values:\n" << std::endl
               << "Lambda: " << lambda << std::endl
               << "mu: " << mu << std::endl
               << "M: " << M << std::endl << std::endl
@@ -54,4 +54,5 @@ void Stats::Print() {
               << "Lq: " << calcLq() << std::endl
               << "Wq: " << calcWq() << std::endl
               << "Rho: " << calcRho() << std::endl;
+              
 }
