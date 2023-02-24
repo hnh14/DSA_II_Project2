@@ -1,4 +1,5 @@
 #include "priority.hpp"
+#include "stats.hpp"
 #include <iostream>
 #include <math.h>
 #include <cstdlib>
@@ -113,9 +114,8 @@ void PriorityQueue::processStatistics(Customer* cust) {
     serviceTime += cust->getDepartureTime() - cust->getStartOfServiceTime(); 
 
     //Po
-    if(serverAvailableCnt == M) {
+    if(serverAvailableCnt >= M-1) {
         idleTime += cust->getDepartureTime() - lastWait;
-    std::cout << lastWait << std::endl;
     }
     lastWait = cust->getDepartureTime();
 }
@@ -139,9 +139,10 @@ int PriorityQueue::getSize() {
 }
 
 void PriorityQueue::Print(int n) {
+    Stats stats(((n/totalWaitTime) / (n)) * M / n, (n / serviceTime) / (n*currentTime), M);
     std::cout << "\nSimulation Statistics:\n"
               << "Po: " << idleTime
-              << "\nAvg Time in System: " << totalWaitTime / n 
-              << "\nAvg Service Time: " << serviceTime / n
-              << "\nRho: " << serviceTime / (M * totalWaitTime) << std::endl;
+              << "\nAvg Time in System: " << stats.calcW()
+              << "\nAvg Service Time: " << (serviceTime*totalWaitTime) / M
+              << "\nRho: " << round(serviceTime / (M * totalWaitTime) * 100) / 100 << std::endl;
 }

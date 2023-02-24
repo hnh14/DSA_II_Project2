@@ -15,7 +15,7 @@ class PriorityQueue {
         int customerWaitCount=0;
         float currentWaitTime;
         float serviceTime=0;
-        int idleTime;
+        float idleTime=0;
         float lastWait=0;
     public:
         PriorityQueue(float, float);

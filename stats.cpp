@@ -9,7 +9,7 @@ Stats::Stats(float lambda, float mu, float M) {
 }
 
 float Stats::calcPo(){
-    return 1.0 / (Summation() + ((1/tgamma(M+1.0)) * pow(lambda / mu, M) * ((M*mu) / (M*mu - lambda)) ));
+    return 1 / (Summation() + ((1/tgamma(M+1.0)) * pow(lambda / mu, M) * ((M*mu) / (M*mu - lambda)) ));
 }
 
 float Stats::calcL() {

@@ -10,7 +10,7 @@ TESTS = $(TEST_SRCS:test/%.cpp=%)
 #TESTS := $(shell find ./test -name "*cpp")
 
 main: $(OBJECTS) main.cpp priority.o customer.o stats.o fifo.o
-	$(CXX) $(CXXFLAGS) -o a.exe $^
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
 	rm -rf *.dSYM
